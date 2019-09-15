@@ -1,9 +1,9 @@
 import React from 'react';
 import { Text, TextInput, StyleSheet } from 'react-native';
 
-const InputBox = ({ placeholder,onChangeText }) => {
+const InputBox = ({ placeholder,onChangeText,secureTextEntry }) => {
   return (
-    <TextInput placeholder={placeholder} onChangeText={onChangeText} style={styles.inputText}/>
+    <TextInput secureTextEntry={secureTextEntry} placeholder={placeholder} onChangeText={onChangeText} style={styles.inputText}/>
   );
 };
 

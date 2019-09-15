@@ -3,6 +3,7 @@ import {View,Text,StatusBar,TouchableOpacity,Image,TextInput} from 'react-native
 import style from '../styles/loginStyle';
 import Button from '../components/Button';
 import InputBox from '../components/InputBox';
+import UserController from '../controller/UserController';
 
 export default class LoginScreens extends Component {
 
@@ -23,11 +24,18 @@ export default class LoginScreens extends Component {
                 </View>
                 <View style={style.formContainer}>
                     <InputBox placeholder="Username" onChangeText={(text)=> {this.setState({username:text})}} />
-                    <InputBox placeholder="Password" onChangeText={(text)=> {this.setState({password:text})}} />
-                    <Button pressed={() => this.props.navigation.navigate('Home')}> LOGIN </Button>
+                    <InputBox placeholder="Password" secureTextEntry={true} onChangeText={(text)=> {this.setState({password:text})}} />
+                    <Button pressed={this.login.bind(this)}> LOGIN </Button>
                     <Button pressed={() => this.props.navigation.navigate('Home')}> REGISTER </Button>
                 </View>
             </View>
         )
+    }
+
+    login(){
+        UserController.userLogin(this.state.username,this.state.password)
+        .then(response => response.headers.map.authorization.replace("Bearer", "").trim(""))
+        .then(newToken => {if(newToken!=null)this.props.navigation.navigate("Home",{token:newToken})})
+        .catch(err => console.log(err));
     }
 }
