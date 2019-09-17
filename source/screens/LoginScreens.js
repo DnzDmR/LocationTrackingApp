@@ -26,7 +26,7 @@ export default class LoginScreens extends Component {
                     <InputBox placeholder="Username" onChangeText={(text)=> {this.setState({username:text})}} />
                     <InputBox placeholder="Password" secureTextEntry={true} onChangeText={(text)=> {this.setState({password:text})}} />
                     <Button pressed={this.login.bind(this)}> LOGIN </Button>
-                    <Button pressed={() => this.props.navigation.navigate('Home')}> REGISTER </Button>
+                    <Button pressed={() => this.props.navigation.navigate("Register")}> REGISTER </Button>
                 </View>
             </View>
         )
