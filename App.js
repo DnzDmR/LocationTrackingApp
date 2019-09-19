@@ -7,7 +7,7 @@ import RegisterScreen from './source/screens/RegisterScreen';
 
 const MainNavigator = createStackNavigator({
   Login: {screen: LoginScreen,navigationOptions:{header:null}},
-  Home: {screen: HomeScreen,navigationOptions:{header:null}},
+  Home: {screen: HomeScreen},
   Register: {screen: RegisterScreen,navigationOptions:{header:null}},
 });
 
