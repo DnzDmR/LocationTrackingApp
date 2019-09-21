@@ -21,6 +21,7 @@ export default class HomeScreens extends Component {
         headerRight:(
             <View style={{ flexDirection: 'row' }}> 
               <Icon style={{marginRight:15}} size={20} raised name='user-plus' type='font-awesome' color='#ffffff' onPress={() => alert("Add")} />
+              <Icon style={{marginRight:15}} size={20} raised name='book' type='font-awesome' color='#ffffff' onPress={() => alert("List")} />
               <Icon style={{marginRight:15}} size={20} raised name='cog' type='font-awesome' color='#ffffff' onPress={() => alert("Settings")} />
             </View>
           ),
