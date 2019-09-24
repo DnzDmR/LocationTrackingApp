@@ -4,10 +4,12 @@ import {createStackNavigator} from 'react-navigation-stack';
 import LoginScreen from './source/screens/LoginScreen';
 import HomeScreen from './source/screens/HomeScreen';
 import RegisterScreen from './source/screens/RegisterScreen';
+import ProfileScreen from './source/screens/ProfileScreen';
 
 const MainNavigator = createStackNavigator({
   Login: {screen: LoginScreen,navigationOptions:{header:null}},
   Home: {screen: HomeScreen},
+  Profile: {screen: ProfileScreen},
   Register: {screen: RegisterScreen,navigationOptions:{header:null}},
 });
 

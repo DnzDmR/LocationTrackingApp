@@ -35,7 +35,7 @@ export default class LoginScreens extends Component {
     login(){
         UserController.userLogin(this.state.username,this.state.password)
         .then(response => response.headers.map.authorization.replace("Bearer", "").trim(""))
-        .then(newToken => {if(newToken!=null)this.props.navigation.navigate("Home",{token:newToken})})
+        .then(newToken => {if(newToken!=null)this.props.navigation.navigate("Home",{token:newToken,username:this.state.username})})
         .catch(err => console.log(err));
     }
 }

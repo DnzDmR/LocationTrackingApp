@@ -6,7 +6,13 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default class HomeScreens extends Component {
     
-    static navigationOptions = {
+    constructor(props){
+        super(props);
+    }
+
+
+    static navigationOptions = ({ navigation }) => {
+        return {
         headerStyle: {
             backgroundColor: '#3a495c',
             borderBottomColor: '#ffffff',
@@ -22,10 +28,10 @@ export default class HomeScreens extends Component {
             <View style={{ flexDirection: 'row' }}> 
               <Icon style={{marginRight:15}} size={20} raised name='user-plus' type='font-awesome' color='#ffffff' onPress={() => alert("Add")} />
               <Icon style={{marginRight:15}} size={20} raised name='book' type='font-awesome' color='#ffffff' onPress={() => alert("List")} />
-              <Icon style={{marginRight:15}} size={20} raised name='cog' type='font-awesome' color='#ffffff' onPress={() => alert("Settings")} />
+              <Icon style={{marginRight:15}} size={20} raised name='cog' type='font-awesome' color='#ffffff' onPress={navigation.getParam('profilePage')} />
             </View>
           ),
-    };
+    }};
 
     render() {
         return (
@@ -44,5 +50,13 @@ export default class HomeScreens extends Component {
                 </MapView>
             </View>
         )
+    }
+
+    componentDidMount() {
+        this.props.navigation.setParams({ profilePage: this.openProfilePage.bind(this) });
+    }
+
+    openProfilePage(){
+        this.props.navigation.navigate("Profile",{token:this.props.navigation.getParam("token"),username:this.props.navigation.getParam("username")});
     }
 }

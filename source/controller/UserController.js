@@ -23,5 +23,21 @@ export default class UserController {
         }).catch(error => console.warn(error));
     }
 
+    static async getUser(username,token){
+        var url = `http://192.168.1.8:8080/users/getUser/${username}`;
+
+        return await fetch(url,{
+            method:'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
+              },
+            }
+        ).then(response => {return response})
+        .catch(error => console.warn(error));
+
+    }
+
      
 }
