@@ -39,5 +39,20 @@ export default class UserController {
 
     }
 
+    static async updateUser(user,token){
+        var url = `http://192.168.1.8:8080/users/updateUser`;
+
+        return await fetch(url,{
+            method:'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
+            },
+            body : JSON.stringify(user)
+        }).then().catch(error => console.warn(error));
+
+    }
+
      
 }
