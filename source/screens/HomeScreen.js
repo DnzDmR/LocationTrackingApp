@@ -3,6 +3,7 @@ import {View,Text,TextInput,Platform} from 'react-native';
 import style from '../styles/loginStyle';
 import MapView, {Marker} from 'react-native-maps';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import LocationController from '../controller/LocationController';
 
 export default class HomeScreens extends Component {
     
@@ -54,6 +55,7 @@ export default class HomeScreens extends Component {
 
     componentDidMount() {
         this.props.navigation.setParams({ profilePage: this.openProfilePage.bind(this) });
+        LocationController.start(this.props.navigation.getParam("username"),this.props.navigation.getParam("token"));
     }
 
     openProfilePage(){
