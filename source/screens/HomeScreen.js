@@ -54,13 +54,17 @@ export default class HomeScreens extends Component {
     }
 
     componentDidMount() {
-        this.props.navigation.setParams({ profilePage: this.openPage.bind(this) });
-        this.props.navigation.setParams({ notificationPage: this.openPage.bind(this) });
+        this.props.navigation.setParams({ profilePage: this.openProfilePage.bind(this) });
+        this.props.navigation.setParams({ notificationPage: this.openNotificationPage.bind(this) });
         LocationController.start(this.props.navigation.getParam("username"),this.props.navigation.getParam("token"));
     }
 
-    openPage(){
+    openProfilePage(){
         this.props.navigation.navigate("Profile",{token:this.props.navigation.getParam("token"),username:this.props.navigation.getParam("username")});
+        
+    }
+    
+    openNotificationPage(){
         this.props.navigation.navigate("Notification",{token:this.props.navigation.getParam("token"),username:this.props.navigation.getParam("username")});
     }
 }
