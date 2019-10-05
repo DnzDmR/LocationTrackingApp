@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import {View,Text,FlatList,Alert} from 'react-native';
 import style from '../styles/loginStyle';
-import Button from '../components/Button';
-import InputBox from '../components/InputBox';
 import NotificationController from '../controller/NotificationController';
 
 export default class NotificationListScreen extends Component {
@@ -36,24 +34,15 @@ export default class NotificationListScreen extends Component {
                     data={this.state.dataSource}
                     keyExtractor={item => item._id}
                     renderItem={({item}) => 
-                    
                     {
-   
                         if(item.status == 0){
-                            return <Text onPress={this.getListViewItem.bind(this, item)}>{item.sender + "asda"}  </Text>
+                            return <Text onPress={this.getListViewItem.bind(this, item)}>{item.sender + " waiting to you"}  </Text>
                         }
                         else if(item.status == 1){
-                            return <Text onPress={this.getListViewItem.bind(this, item)}>{item.sender + "Faloowing"} </Text>
-                        }
-                        
-                    }
-                    
-                
-                    }  
+                            return <Text onPress={this.getListViewItem.bind(this, item)}>{item.sender + " following to you"} </Text>
+                        }   
+                    }} 
                     ItemSeparatorComponent={this.renderSeparator}      
-                
-                
-                    
                     />
 
                 </View>
