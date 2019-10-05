@@ -3,7 +3,7 @@ import {View,Text} from 'react-native';
 import style from '../styles/loginStyle';
 import Button from '../components/Button';
 import InputBox from '../components/InputBox';
-import UserController from '../controller/UserController';
+import NotificationController from '../controller/NotificationController';
 
 export default class NotificationScreen extends Component {
     
@@ -37,6 +37,14 @@ export default class NotificationScreen extends Component {
     }
 
     sendRequest(){
+        var token = this.props.navigation.getParam('token');
+        var notifiation = {
+            sender:this.props.navigation.getParam('username'),
+            receiver:this.state.receiver,
+            status:"0"
+        }
+        NotificationController.sendNotification(notifiation,token);
+
 
     }
 
