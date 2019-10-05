@@ -13,6 +13,7 @@ export default class HomeScreens extends Component {
         this.state={
             latitude: 37.78825,
             longitude: -122.4324,
+            markers: [],
         }
     }
 
@@ -51,8 +52,12 @@ export default class HomeScreens extends Component {
                         longitudeDelta: 0.0421,
                     }}>
 
-
-
+                    {this.state.markers.map(marker => (
+                        <Marker 
+                        coordinate={{longitude:Number(marker.longitude),latitude:Number(marker.latitude)}}
+                        title={marker.user.firstName + " " + marker.user.lastName}
+                        />
+                    ))}  
                 </MapView>
             </View>
         )
@@ -64,6 +69,7 @@ export default class HomeScreens extends Component {
         this.props.navigation.setParams({ notificationListPage: this.openNotificationListPage.bind(this) });
         LocationController.start(this.props.navigation.getParam("username"),this.props.navigation.getParam("token"));
         this.getCurrentLocation();
+        this.getFollowingUserLocation();
         
     }
 
@@ -81,10 +87,16 @@ export default class HomeScreens extends Component {
 
     getCurrentLocation(){
         LocationController.getLocation(this.props.navigation.getParam("username"),this.props.navigation.getParam("token"))
-        .then(res => res.json())
-        .then(re => this.setState({
-            latitude: Number(re.latitude),
-            longitude: Number(re.longitude),
+        .then(response => response.json())
+        .then(json => this.setState({
+            latitude: Number(json.latitude),
+            longitude: Number(json.longitude),
         }))
+    }
+
+    getFollowingUserLocation(){
+        LocationController.getFollowingUserLocation(this.props.navigation.getParam("username"),this.props.navigation.getParam("token"))
+        .then(response => response.json())
+        .then(json => this.setState({ markers:json }))
     }
 }
