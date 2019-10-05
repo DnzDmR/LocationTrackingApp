@@ -28,7 +28,7 @@ export default class HomeScreens extends Component {
         headerRight:(
             <View style={{ flexDirection: 'row' }}> 
               <Icon style={{marginRight:15}} size={20} raised name='user-plus' type='font-awesome' color='#ffffff' onPress={navigation.getParam('notificationPage')} />
-              <Icon style={{marginRight:15}} size={20} raised name='book' type='font-awesome' color='#ffffff' onPress={() => alert("List")} />
+              <Icon style={{marginRight:15}} size={20} raised name='book' type='font-awesome' color='#ffffff' onPress={navigation.getParam('notificationListPage')} />
               <Icon style={{marginRight:15}} size={20} raised name='cog' type='font-awesome' color='#ffffff' onPress={navigation.getParam('profilePage')} />
             </View>
           ),
@@ -56,15 +56,19 @@ export default class HomeScreens extends Component {
     componentDidMount() {
         this.props.navigation.setParams({ profilePage: this.openProfilePage.bind(this) });
         this.props.navigation.setParams({ notificationPage: this.openNotificationPage.bind(this) });
+        this.props.navigation.setParams({ notificationListPage: this.openNotificationListPage.bind(this) });
         LocationController.start(this.props.navigation.getParam("username"),this.props.navigation.getParam("token"));
     }
 
     openProfilePage(){
-        this.props.navigation.navigate("Profile",{token:this.props.navigation.getParam("token"),username:this.props.navigation.getParam("username")});
-        
+        this.props.navigation.navigate("Profile",{token:this.props.navigation.getParam("token"),username:this.props.navigation.getParam("username")});    
     }
     
     openNotificationPage(){
         this.props.navigation.navigate("Notification",{token:this.props.navigation.getParam("token"),username:this.props.navigation.getParam("username")});
+    }
+
+    openNotificationListPage(){
+        this.props.navigation.navigate("NotificationList",{token:this.props.navigation.getParam("token"),username:this.props.navigation.getParam("username")});
     }
 }
