@@ -4,11 +4,16 @@ import style from '../styles/loginStyle';
 import MapView, {Marker} from 'react-native-maps';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import LocationController from '../controller/LocationController';
+import { thisExpression } from '@babel/types';
 
 export default class HomeScreens extends Component {
     
     constructor(props){
         super(props);
+        this.state={
+            latitude: 37.78825,
+            longitude: -122.4324,
+        }
     }
 
 
@@ -40,8 +45,8 @@ export default class HomeScreens extends Component {
                 <MapView
                     style={style.map}
                     initialRegion={{
-                        latitude: 37.78825,
-                        longitude: -122.4324,
+                        latitude: this.state.latitude,
+                        longitude: this.state.longitude,
                         latitudeDelta: 0.0922,
                         longitudeDelta: 0.0421,
                     }}>
@@ -58,6 +63,8 @@ export default class HomeScreens extends Component {
         this.props.navigation.setParams({ notificationPage: this.openNotificationPage.bind(this) });
         this.props.navigation.setParams({ notificationListPage: this.openNotificationListPage.bind(this) });
         LocationController.start(this.props.navigation.getParam("username"),this.props.navigation.getParam("token"));
+        this.getCurrentLocation();
+        
     }
 
     openProfilePage(){
@@ -70,5 +77,14 @@ export default class HomeScreens extends Component {
 
     openNotificationListPage(){
         this.props.navigation.navigate("NotificationList",{token:this.props.navigation.getParam("token"),username:this.props.navigation.getParam("username")});
+    }
+
+    getCurrentLocation(){
+        LocationController.getLocation(this.props.navigation.getParam("username"),this.props.navigation.getParam("token"))
+        .then(res => res.json())
+        .then(re => this.setState({
+            latitude: Number(re.latitude),
+            longitude: Number(re.longitude),
+        }))
     }
 }

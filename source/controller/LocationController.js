@@ -37,6 +37,25 @@ export default class LocationController {
     setTimeout(()=>{LocationController.start(username,token)},10000);
   }
 
+   static async getLocation(username,token){
+
+      var url = `http://192.168.1.8:8080/location/getLocation/${username}`;
+
+      return await fetch(url,{
+          method:'GET',
+          headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${token}`,
+            },
+          }
+      ).then(response => {return response})
+      .catch(error => console.warn(error));
+
+
+
+  }
+
 
 
 
