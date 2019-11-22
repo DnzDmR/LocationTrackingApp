@@ -1,2 +1,2 @@
 # LocationTrackingApp
-React Native LocationTracking App
+React Native and Spring Boot Web Service 
